@@ -1,23 +1,23 @@
+import 'package:chapter_7_state_management/inherited_model/inherited_model.dart';
 import 'package:chapter_7_state_management/inherited_widget/go_to_next.dart';
-import 'package:chapter_7_state_management/inherited_widget/pass_counter.dart';
 import 'package:flutter/material.dart';
 
-class MyInheritedWidget extends StatefulWidget {
-  const MyInheritedWidget({Key? key}) : super(key: key);
+class MyIncrementCounter extends StatefulWidget {
+  const MyIncrementCounter({Key? key}) : super(key: key);
 
   @override
-  State<MyInheritedWidget> createState() => _MyInheritedWidgetState();
+  State<MyIncrementCounter> createState() => _MyIncrementCounterState();
 }
 
-class _MyInheritedWidgetState extends State<MyInheritedWidget> {
+class _MyIncrementCounterState extends State<MyIncrementCounter> {
 
   @override
   Widget build(BuildContext context) {
-    final counter = PassCounterInheritedWidget.of(context);
-    debugPrint("Inherited Widget Build");
+    final counter=PassCounterInheritedModel.of(context,'counter2');
+    debugPrint("Increment Counter Build");
     return Scaffold(
       appBar: AppBar(
-        title: Text("Inherited Widget"),
+        title: Text("Inherited Model"),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
@@ -40,7 +40,11 @@ class _MyInheritedWidgetState extends State<MyInheritedWidget> {
             Text("You have pushed the button this many times : ",
                 style: TextStyle(fontSize: 19)),
             Text(
-              counter.counter.toString(),
+              counter!.counter1.toString(),
+              style: TextStyle(fontSize: 25),
+            ),
+            Text(
+              counter.counter2.toString(),
               style: TextStyle(fontSize: 25),
             )
           ],
@@ -49,7 +53,8 @@ class _MyInheritedWidgetState extends State<MyInheritedWidget> {
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             setState(() {
-              counter.counter++;
+              counter.counter1++;
+              counter.counter2++;
             });
             // increment();
           },

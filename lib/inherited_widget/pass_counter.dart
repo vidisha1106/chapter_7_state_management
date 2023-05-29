@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
-class PassCounter extends InheritedWidget {
+class PassCounterInheritedWidget extends InheritedWidget {
   int counter;
 
-  PassCounter({
+  PassCounterInheritedWidget({
     Key? key,
     required Widget child,
     required this.counter,
   }) : super(key: key, child: child);
 
-  static PassCounter of(BuildContext context) {
-    final PassCounter? result =
-        context.dependOnInheritedWidgetOfExactType<PassCounter>();
+  static PassCounterInheritedWidget of(BuildContext context) {
+    final PassCounterInheritedWidget? result = context
+        .dependOnInheritedWidgetOfExactType<PassCounterInheritedWidget>();
     assert(result != null, 'No PassCounter found in context');
     return result!;
   }
 
   @override
-  bool updateShouldNotify(PassCounter old) {
+  bool updateShouldNotify(PassCounterInheritedWidget old) {
     return old.counter != counter;
   }
 }
+

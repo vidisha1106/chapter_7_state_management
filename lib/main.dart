@@ -1,9 +1,12 @@
 import 'package:chapter_7_state_management/components/custom_elevated_button.dart';
 import 'package:chapter_7_state_management/counter_change_notifier_provider.dart';
+import 'package:chapter_7_state_management/inherited_model/increment_counter.dart';
+import 'package:chapter_7_state_management/inherited_model/inherited_model.dart';
 import 'package:chapter_7_state_management/inherited_widget/inherited_widget.dart';
 import 'package:chapter_7_state_management/inherited_widget/pass_counter.dart';
 import 'package:chapter_7_state_management/provider.dart';
 import 'package:flutter/material.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -14,22 +17,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PassCounter(
+    return PassCounterInheritedWidget(
       counter: 0,
-      child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: MyHomePage(),
-          debugShowCheckedModeBanner: false,
-          routes: {
-            '/provider': (context) => MyProvider(),
-            '/CounterChangeNotifierProvider': (context) =>
-                MyCounterChangeNotifierProvider(),
-            '/InheritedWidget': (context) => MyInheritedWidget()
-          }),
+      child: PassCounterInheritedModel(
+        counter1: 0,
+        counter2: 0,
+        child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home: MyHomePage(),
+            debugShowCheckedModeBanner: false,
+            routes: {
+              '/provider': (context) => MyProvider(),
+              '/CounterChangeNotifierProvider': (context) =>
+                  MyCounterChangeNotifierProvider(),
+              '/InheritedWidget': (context) => MyInheritedWidget(),
+              '/InheritedModel': (context) => MyIncrementCounter()
+            }),
+      ),
     );
   }
 }
@@ -62,7 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             CustomElevatedButton(
               path: '/InheritedWidget',
-              pathName: 'MyInheritedWidget',
+              pathName: 'Inheritrd Widget',
+            ),
+            CustomElevatedButton(
+              path: '/InheritedModel',
+              pathName: 'Inherited Model',
             )
           ],
         ),
